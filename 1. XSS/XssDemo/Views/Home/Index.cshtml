@@ -1,0 +1,16 @@
+﻿@model List<XssDemo.Models.NewBlogComment>
+@{
+    ViewBag.Title = "XSS Demo";
+}
+
+<h2>XSS Demo</h2>
+
+<h4>Comments</h4>
+@Html.ActionLink("Add comment", "AddComment", null, new { @class = "btn btn-primary" })
+<dl>
+    @foreach (var comment in Model)
+    {
+        <dt>From: @comment.Email</dt>
+        <dd>@Html.Raw(comment.Comments)</dd>
+    }
+</dl>
