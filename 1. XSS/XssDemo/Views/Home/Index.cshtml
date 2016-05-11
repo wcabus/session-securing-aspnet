@@ -1,4 +1,4 @@
-﻿@model List<XssDemo.Models.NewBlogComment>
+﻿@model List<XssDemo.Models.IBlogComment>
 @{
     ViewBag.Title = "XSS Demo";
 }
@@ -7,6 +7,8 @@
 
 <h4>Comments</h4>
 @Html.ActionLink("Add comment", "AddComment", null, new { @class = "btn btn-primary" })
+@Html.ActionLink("Add comment (ValidateInput method)", "AddComment2", null, new { @class = "btn btn-primary" })
+@Html.ActionLink("Add comment (Anti XSS)", "AddComment3", null, new { @class = "btn btn-primary" })
 <dl>
     @foreach (var comment in Model)
     {

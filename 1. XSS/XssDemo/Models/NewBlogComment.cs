@@ -3,7 +3,7 @@ using System.Web.Mvc;
 
 namespace XssDemo.Models
 {
-    public class NewBlogComment
+    public class NewBlogComment : IBlogComment
     {
         [EmailAddress, Required]
         public string Email { get; set; } 

@@ -1,12 +1,14 @@
-﻿@model XssDemo.Models.NewBlogComment
+﻿@model XssDemo.Models.IBlogComment
 @{
     ViewBag.Title = "XSS Demo";
+    var actionName = Request.RequestContext.RouteData.Values["action"] as string;
 }
 
 <h2>XSS Demo</h2>
 
-@using (Html.BeginForm())
+@using (Html.BeginForm(actionName, "Home", FormMethod.Post, new { novalidate = "novalidate" }))
 {
+    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
     <div class="form-horizontal">
         <div class="form-group">
             @Html.LabelFor(m => m.Email, new {@class = "control-label col-md-3"})
