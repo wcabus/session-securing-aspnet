@@ -72,22 +72,46 @@ namespace XssDemo.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult AddComment3()
-        {
-            return View("AddComment");
-        }
 
-        [HttpPost]
-        public ActionResult AddComment3(NewBlogComment2 model)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View("AddComment", model);
-            }
 
-            _comments.Add(model);
 
-            return RedirectToAction("Index");
-        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        //public ActionResult AddComment3()
+        //{
+        //    return View("AddComment");
+        //}
+
+        //[HttpPost]
+        //public ActionResult AddComment3(NewBlogComment model)
+        //{
+        //    if (!string.IsNullOrEmpty(model?.Comments))
+        //    {
+        //        var s = new Ganss.XSS.HtmlSanitizer();
+        //        model.Comments = s.Sanitize(model.Comments);
+        //    }
+
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return View("AddComment", model);
+        //    }
+
+        //    _comments.Add(model);
+
+        //    return RedirectToAction("Index");
+        //}
+
     }
 }
