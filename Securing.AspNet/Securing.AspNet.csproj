@@ -173,6 +173,7 @@
     <Compile Include="Controllers\VulnerableManageController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Extensions\MvcExtensions.cs" />
+    <Compile Include="Filters\ValidateAjaxAntiForgeryTokenAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -252,6 +253,7 @@
     <Content Include="Views\Manage2\Index.cshtml" />
     <Content Include="Views\Manage2\SetPassword.cshtml" />
     <Content Include="Views\Home\AjaxForm.cshtml" />
+    <Content Include="Views\Home\AjaxFormCsrf.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

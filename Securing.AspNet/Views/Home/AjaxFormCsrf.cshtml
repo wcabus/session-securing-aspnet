@@ -1,0 +1,56 @@
+﻿@{
+    ViewBag.Title = "Posting XML HTTP requests - CSRF";
+}
+
+<h2>Posting XML HTTP requests - CSRF</h2>
+
+<div class="form-horizontal">
+    <div class="form-group">
+        <label for="name" class="control-label col-md-3">Name:</label>
+        <div class="col-md-9">
+            <input type="text" name="name" id="name" class="form-control" />
+        </div>
+    </div>
+    <button id="submit" type="button" class="btn btn-primary">Submit</button>
+</div>
+
+@Html.AntiForgeryToken()
+
+<hr />
+
+<div id="target"></div>
+
+@section scripts {
+    <script type="text/javascript">
+        (function ($) {
+            
+            function postAjax() {
+                var data = { name: document.getElementById('name').value }
+                var target = document.getElementById('target');
+
+                var csrfToken = document.getElementsByName('@ValidateAjaxAntiForgeryTokenAttribute.AntiForgeryTokenFieldName')[0].value;
+
+                $.ajax({
+                    url: '@Url.Action("AjaxPostActionCsrf")',
+                    data: window.JSON.stringify(data),
+                    type: 'POST',
+                    dataType: 'json',
+                    contentType: 'application/json; charset=utf-8',
+                    headers: {
+                        '@ValidateAjaxAntiForgeryTokenAttribute.AntiForgeryTokenHeaderName': csrfToken
+                    }
+                })
+                    .fail(function (xhr) {
+                        target.innerHTML = '<p>POST failed (' + xhr.status + ' ' + xhr.statusText + ')!<br/>Result: <pre style="white-space: preserve">' + xhr.responseText + '</pre></p>';
+                    })
+                    .done(function (result) {
+                        target.innerHTML = '<p>POST succeeded.<br/>Result: <pre style="white-space: preserve">' + window.JSON.stringify(result) + '</pre></p>';
+                    });
+            }
+
+            var btn = document.getElementById('submit');
+            btn.addEventListener('click', postAjax);
+
+        })(jQuery);
+    </script>
+}
