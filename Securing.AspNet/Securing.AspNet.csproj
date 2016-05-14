@@ -179,6 +179,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApiControllers\ValuesController.cs" />
+    <Compile Include="ApiModels\PostValueModel.cs" />
+    <Compile Include="ApiModels\ValueModel.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
@@ -189,6 +192,7 @@
     <Compile Include="Controllers\VulnerableManageController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Extensions\MvcExtensions.cs" />
+    <Compile Include="Filters\ValidateApiAntiForgeryTokenAttribute.cs" />
     <Compile Include="Filters\ValidateAjaxAntiForgeryTokenAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -270,6 +274,7 @@
     <Content Include="Views\Manage2\SetPassword.cshtml" />
     <Content Include="Views\Home\AjaxForm.cshtml" />
     <Content Include="Views\Home\AjaxFormCsrf.cshtml" />
+    <Content Include="Views\Home\AjaxFormApi.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

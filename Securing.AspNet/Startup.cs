@@ -27,7 +27,7 @@ namespace Securing.AspNet
             jsonFormatter.SerializerSettings.ContractResolver = new Newtonsoft.Json.Serialization.CamelCasePropertyNamesContractResolver();
 
             config.MapHttpAttributeRoutes();
-
+            
             app.UseWebApi(config);
         }
     }

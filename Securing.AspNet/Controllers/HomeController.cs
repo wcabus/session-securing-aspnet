@@ -65,5 +65,10 @@ namespace Securing.AspNet.Controllers
             model.Name = $"Hello {model.Name}!";
             return Json(model);
         }
+
+        public ActionResult AjaxFormApi()
+        {
+            return View();
+        }
     }
 }

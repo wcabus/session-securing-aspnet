@@ -1,21 +1,28 @@
 ﻿@{
-    ViewBag.Title = "Posting XML HTTP requests - CSRF";
+    ViewBag.Title = "Posting XML HTTP requests - CSRF and Web API";
 }
 
-<h2>Posting XML HTTP requests - CSRF</h2>
+@functions {
+    public string CsrfTokens()
+    {
+        string cookieToken, formToken;
+        AntiForgery.GetTokens(null, out cookieToken, out formToken);
+
+        return cookieToken + ":" + formToken;
+    }
+}
+
+<h2>Posting XML HTTP requests - CSRF and Web API</h2>
 
 <div class="form-horizontal">
     <div class="form-group">
-        <label for="name" class="control-label col-md-3">Name:</label>
+        <label for="name" class="control-label col-md-3">Value:</label>
         <div class="col-md-9">
-            <input type="text" name="name" class="form-control" />
+            <input type="text" name="value" class="form-control" />
         </div>
     </div>
     <button id="submit" type="button" class="btn btn-primary">Submit</button>
 </div>
-
-@Html.AntiForgeryToken()
-
 <hr />
 
 <div id="target"></div>
@@ -25,19 +32,17 @@
         (function ($) {
             
             function postAjax() {
-                var data = { name: document.getElementsByName('name')[0].value }
+                var data = { value: document.getElementsByName('value')[0].value }
                 var target = document.getElementById('target');
 
-                var csrfToken = document.getElementsByName('@ValidateAjaxAntiForgeryTokenAttribute.AntiForgeryTokenFieldName')[0].value;
-
                 $.ajax({
-                    url: '@Url.Action("AjaxPostActionCsrf")',
+                    url: '/api/csrf/values',
                     data: window.JSON.stringify(data),
                     type: 'POST',
                     dataType: 'json',
                     contentType: 'application/json; charset=utf-8',
                     headers: {
-                        '@ValidateAjaxAntiForgeryTokenAttribute.AntiForgeryTokenHeaderName': csrfToken
+                        '@ValidateApiAntiForgeryTokenAttribute.AntiForgeryTokenHeaderName': '@CsrfTokens()'
                     }
                 })
                     .fail(function (xhr) {
