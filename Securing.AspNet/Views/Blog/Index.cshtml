@@ -1,0 +1,38 @@
+﻿@model IEnumerable<PostWithCommentCount>
+
+@{
+    ViewBag.Title = "Blog";
+}
+
+@functions
+{
+
+    string GetExcerpt(PostWithCommentCount item)
+    {
+        if (item.Contents.Length > 100)
+        {
+            return item.Contents.Substring(0, 100) + "...";
+        }
+
+        return item.Contents;
+    }
+}
+
+<h2>Blog</h2>
+@if (Request.IsAuthenticated)
+{
+    @Html.ActionLink("Add new post", "AddPost", "Blog", null, new { @class = "btn btn-primary" })
+}
+<dl>
+    @foreach (var post in Model)
+    {
+        <dt>
+            <h4>@Html.ActionLink(post.Title, "Read", new { post.Id })</h4>
+            <h5>Published at @post.PublishedAt.ToLocalTime().ToString("f") by @post.Author</h5>
+            <h6>@post.CommentCount comment(s)</h6>
+        </dt>
+        <dd style="white-space: pre-line;">
+            @GetExcerpt(post)
+        </dd>
+    }
+</dl>

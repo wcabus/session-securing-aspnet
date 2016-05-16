@@ -1,0 +1,39 @@
+﻿@model PostWithComments
+
+@{
+    ViewBag.Title = Model.Title;
+}
+
+<h2>@Model.Title</h2>
+<h5>Published at @Model.PublishedAt.ToLocalTime().ToString("f") by @Model.Author</h5>
+<div style="white-space: pre-line;">
+    @Html.DisplayFor(model => model.Contents)
+</div>
+
+<hr/>
+<h3>Comments</h3>
+@Html.ActionLink("Leave comment", "AddComment", "Blog", new { Model.Id }, new { @class = "btn btn-primary" })
+<br /><br />
+<dl class="dl-horizontal">
+    @foreach (var c in Model.Comments)
+    {
+        <dt>
+            @c.Name
+            @if (Request.IsAuthenticated)
+            {
+                using (Html.BeginForm("DeleteComment", "Blog"))
+                {
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="Id" value="@c.Id"/>
+                    <input type="hidden" name="PostId" value="@Model.Id"/>
+                    <button type="submit" class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-trash"></i></button>
+                }
+            }
+        </dt>
+        <dd>@Html.Raw(c.Contents)</dd>
+    }
+</dl>
+
+<p>
+    @Html.ActionLink("Back to blog", "Index")
+</p>
