@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Breaking ASP.NET - CORS</title>
+	<meta charset="utf-8" />
+</head>
+<body>
+<form action="https://localhost:44354/api/values" method="POST">
+    <label for="value">Value:</label>
+    <input type="text" name="value" id="value"/>
+    <br/>
+    <input type="submit" value="Post to API"/>
+</form>
+<button type="button" id="btnCors">Post to API using XHR</button>
+<div id="target"></div>
+
+<script src="https://code.jquery.com/jquery-2.2.3.min.js" integrity="sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo=" crossorigin="anonymous"></script>
+<script type="text/javascript">
+    (function($) {
+        $('#btnCors').click(function() {
+            $.ajax({
+                url: 'https://localhost:44354/api/values',
+                data: window.JSON.stringify({
+                    value: $('#value').val()
+                }),
+                type: 'POST',
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8'
+            })
+            .done(function(result) {
+                $('#target').html('Result: ' + window.JSON.stringify(result));
+            })
+            .fail(function(xhr) {
+                $('#target').html('Status: ' + xhr.status + ' ' + xhr.statusText);
+            });
+        });
+    })(jQuery);
+</script>
+</body>
+</html>

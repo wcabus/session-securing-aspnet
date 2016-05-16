@@ -86,6 +86,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="cors.html" />
     <Content Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -95,7 +96,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="csrf2.html" />
     <Content Include="csrf.html" />
     <Content Include="index.html" />
     <Content Include="Web.config" />
