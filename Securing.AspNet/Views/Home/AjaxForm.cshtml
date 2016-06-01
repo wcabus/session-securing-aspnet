@@ -1,4 +1,5 @@
-﻿@{
+﻿@using NWebsec.Mvc.HttpHeaders.Csp
+@{
     ViewBag.Title = "Posting XML HTTP requests";
 }
 
@@ -19,7 +20,7 @@
 <div id="target"></div>
 
 @section scripts {
-    <script type="text/javascript">
+    <script type="text/javascript" @Html.CspScriptNonce()>
         (function ($) {
             
             function postAjax() {

@@ -4,12 +4,13 @@ using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using NWebsec.Mvc.HttpHeaders.Csp;
 using Securing.AspNet.Domain;
 using Securing.AspNet.Models.BlogController;
 
 namespace Securing.AspNet.Controllers
 {
-    [AllowAnonymous]
+    [AllowAnonymous, CspScriptSrcReportOnly(CustomSources = "*.realdolmen.com")]
     public class BlogController : Controller
     {
         private readonly BlogContext _dbContext = new BlogContext();
