@@ -19,7 +19,7 @@ namespace Securing.AspNet.Filters
             var request = actionContext.Request;
 
             // Validate using the value from a custom header as the form token
-            if (request.Headers.Contains(AntiForgeryTokenHeaderName))
+            if (request.Headers.Any(x => string.Equals(x.Key, AntiForgeryTokenHeaderName, StringComparison.OrdinalIgnoreCase)))
             {
                 var headerValue = request.Headers.GetValues(AntiForgeryTokenHeaderName).First().Split(':');
                 var cookieToken = headerValue[0];
