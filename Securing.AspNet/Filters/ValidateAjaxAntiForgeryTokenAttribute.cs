@@ -23,7 +23,7 @@ namespace Securing.AspNet.Filters
             if (request.IsAjaxRequest() && !request.Form.AllKeys.Contains(AntiForgeryTokenFieldName))
             {
                 // Validate using the value from a custom header as the form token
-                if (request.Headers.AllKeys.Contains(AntiForgeryTokenHeaderName))
+                if (request.Headers.AllKeys.Any(x => string.Equals(x, AntiForgeryTokenHeaderName, StringComparison.OrdinalIgnoreCase)))
                 {
                     var headerToken = request.Headers[AntiForgeryTokenHeaderName];
                     var cookieToken = GetCookieCsrfTokenValue(request);
